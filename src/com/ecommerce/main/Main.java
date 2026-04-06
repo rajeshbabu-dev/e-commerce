@@ -1,7 +1,7 @@
 package com.ecommerce.main;
 
 import com.ecommerce.model.Product;
-import com.ecommerce.model.ProductRepository;
+import com.ecommerce.repository.ProductRepository;
 
 import java.util.List;
 

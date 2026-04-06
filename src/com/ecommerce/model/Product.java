@@ -9,6 +9,10 @@ public class Product {
     private float discountPercentage;
     private int rating;
     private boolean isAvailable;
+    private String company;
+    private String category;
+    private int manufacturedYear;
+
 
     public Product() {
     }
@@ -67,16 +71,43 @@ public class Product {
         return this;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public Product setCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public Product setCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public int getManufacturedYear() {
+        return manufacturedYear;
+    }
+
+    public Product setManufacturedYear(int manufacturedYear) {
+        this.manufacturedYear = manufacturedYear;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && maxRetailPrice == product.maxRetailPrice && Float.compare(discountPercentage, product.discountPercentage) == 0 && rating == product.rating && isAvailable == product.isAvailable && Objects.equals(name, product.name);
+        return id == product.id && maxRetailPrice == product.maxRetailPrice && Float.compare(discountPercentage, product.discountPercentage) == 0 && rating == product.rating && isAvailable == product.isAvailable && manufacturedYear == product.manufacturedYear && Objects.equals(name, product.name) && Objects.equals(company, product.company) && Objects.equals(category, product.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, maxRetailPrice, discountPercentage, rating, isAvailable);
+        return Objects.hash(id, name, maxRetailPrice, discountPercentage, rating, isAvailable, company, category, manufacturedYear);
     }
 
     @Override
@@ -88,6 +119,9 @@ public class Product {
                 ", discountPercentage=" + discountPercentage +
                 ", rating=" + rating +
                 ", isAvailable=" + isAvailable +
+                ", company='" + company + '\'' +
+                ", category='" + category + '\'' +
+                ", manufacturedYear=" + manufacturedYear +
                 '}';
     }
 }

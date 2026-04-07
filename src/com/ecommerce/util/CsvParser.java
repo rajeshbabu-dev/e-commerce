@@ -20,7 +20,7 @@ public class CsvParser {
 
     public List<Product> getProductsFromCsv() throws IOException {
         List<Product> products = new ArrayList<>();
-        File file = new File("/D/products.csv");
+        File file = new File("D:/Downloads/products.csv");
         BufferedReader br = new BufferedReader(new FileReader(file));
         br.readLine();
         String productData = br.readLine();
@@ -32,11 +32,10 @@ public class CsvParser {
                     .setName(Split[1])
                     .setMaxRetailPrice(Integer.parseInt(Split[2]))
                     .setDiscountPercentage(Float.parseFloat(Split[3]))
-                    .setRating(Integer.parseInt(Split[4]))
-                    .setAvailable(Boolean.parseBoolean(Split[5]))
-                    .setCompany(Split[6])
-                    .setCategory(Split[7])
-                    .setManufacturedYear(Integer.parseInt(Split[8]));
+                    .setAvailable(Boolean.parseBoolean(Split[4]))
+                    .setCompany(Split[5])
+                    .setCategory(Split[6])
+                    .setManufacturedYear(Integer.parseInt(Split[7]));
             products.add(product);
             productData = br.readLine();
 

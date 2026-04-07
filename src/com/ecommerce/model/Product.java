@@ -7,7 +7,6 @@ public class Product {
     private String name;
     private int maxRetailPrice;
     private float discountPercentage;
-    private int rating;
     private boolean isAvailable;
     private String company;
     private String category;
@@ -53,15 +52,6 @@ public class Product {
         return this;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public Product setRating(int rating) {
-        this.rating = rating;
-        return this;
-    }
-
     public boolean isAvailable() {
         return isAvailable;
     }
@@ -102,12 +92,12 @@ public class Product {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && maxRetailPrice == product.maxRetailPrice && Float.compare(discountPercentage, product.discountPercentage) == 0 && rating == product.rating && isAvailable == product.isAvailable && manufacturedYear == product.manufacturedYear && Objects.equals(name, product.name) && Objects.equals(company, product.company) && Objects.equals(category, product.category);
+        return id == product.id && maxRetailPrice == product.maxRetailPrice && Float.compare(discountPercentage, product.discountPercentage) == 0 &&  isAvailable == product.isAvailable && manufacturedYear == product.manufacturedYear && Objects.equals(name, product.name) && Objects.equals(company, product.company) && Objects.equals(category, product.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, maxRetailPrice, discountPercentage, rating, isAvailable, company, category, manufacturedYear);
+        return Objects.hash(id, name, maxRetailPrice, discountPercentage, isAvailable, company, category, manufacturedYear);
     }
 
     @Override
@@ -117,7 +107,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", maxRetailPrice=" + maxRetailPrice +
                 ", discountPercentage=" + discountPercentage +
-                ", rating=" + rating +
                 ", isAvailable=" + isAvailable +
                 ", company='" + company + '\'' +
                 ", category='" + category + '\'' +

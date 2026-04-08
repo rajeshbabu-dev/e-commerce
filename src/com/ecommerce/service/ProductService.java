@@ -1,5 +1,7 @@
 package com.ecommerce.service;
 
+import com.ecommerce.exeption.ProductExistException;
+import com.ecommerce.exeption.ProductNotFoundException;
 import com.ecommerce.model.Product;
 
 import java.util.List;
@@ -8,18 +10,42 @@ import java.util.Optional;
 
 public interface ProductService {
 
+     /* CRUD Methods */
+
+     /* -> Save */
+      Product save(Product product) throws ProductExistException;
+
+     /*Find BY Id*/
+     Product getById(int id) throws ProductNotFoundException;
+
+     /* Get All */
+     List<Product> getAllProducts();
+
+     /* Update */
+     Product update(int id, Product product) throws ProductNotFoundException;
+
+     /*Delete*/
+     void delete(int id) throws ProductNotFoundException;
+
+
+
+// 1 Get all available products based on availability.
      List<Product> getProductsByAvailability(boolean isAvailable);
+
+     /* 2 Get all products belonging to a given category.*/
      List<Product> getProductsByCategory(String category);
+
+     /* 3 Get all products with price greater than a given value*/
      List<Product> getProductsByPriceGreaterThan(int price);
-     /*Get names of all products.*/
+
+     /* 4 Get names of all products.*/
      List<String> getAllProductsName();
 
-     /*Count how many products are available.*/
+     /* 5 Count how many products are available.*/
      long getAvailableProductsCount();
 
      /*6 Check if there is any product from a given company.
           existsByCompanyName */
-
      boolean isProductAvailableFromCompany(String companyName);
 
      /*7. Check if all products are available

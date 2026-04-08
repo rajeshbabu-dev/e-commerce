@@ -1,5 +1,7 @@
 package com.ecommerce.service;
 
+import com.ecommerce.exeption.ProductExistException;
+import com.ecommerce.exeption.ProductNotFoundException;
 import com.ecommerce.model.Product;
 import com.ecommerce.repository.ProductRepository;
 
@@ -12,9 +14,50 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
-
+//dependency
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+//    @Override
+//    public Product save(Product product) throws ProductExistException {
+//        Optional<Product> byId = productRepository.getById(product.getId());
+//        if (byId.isPresent()){
+//            throw new ProductExistException("Product already exists : " + product.getId());
+//        }else
+//            productRepository.save(product);
+//            return product;
+//    }
+
+    /*Save*/
+    @Override
+    public Product save(Product product) throws ProductExistException{
+        productRepository.getById(product.getId()).ifPresent(p-> {throw new ProductExistException("Product already exists with id " + product.getId());});
+        return productRepository.save(product);
+    }
+
+
+        /*Get By Id*/
+    @Override
+    public Product getById(int id) throws ProductNotFoundException {
+        return productRepository.getById(id).orElseThrow(() -> new ProductNotFoundException("Product Not Found " + id));
+    }
+        /*Get All products*/
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.getAll();
+    }
+        /*Update*/
+    @Override
+    public Product update(int id, Product product) throws ProductNotFoundException {
+        productRepository.getById(id).orElseThrow(() -> new ProductNotFoundException("Product Not Found " + id));
+        return productRepository.update(id, product);
+    }
+        /*Delete*/
+    @Override
+    public void delete(int id) throws ProductNotFoundException {
+        productRepository.getById(id).orElseThrow(() -> new ProductNotFoundException("Product Not Found " + id));
+        productRepository.delete(id);
     }
 
     @Override
@@ -120,7 +163,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getAll().stream()
                 .filter(Product -> Product.getManufacturedYear() > year)
                 .toList();
-
     }
 
     @Override

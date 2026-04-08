@@ -29,8 +29,17 @@ public class ProductRepository {
     public List<Product> getAll() {
         return products;
     }
+//    update a product
+    public Product update(int id , Product product) {
+        this.products.replaceAll(p ->  p.getId() == id ?  product : p);
+        return product;
+    }
 
-    /*save */
+//    delete a product
+    public boolean delete(int id) {
+        this.products.removeIf(product -> product.getId() == id);
+        return true;
+    }
 
 
 }

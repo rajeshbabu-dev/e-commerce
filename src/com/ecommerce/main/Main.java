@@ -1,6 +1,12 @@
 package com.ecommerce.main;
 
+import com.ecommerce.enums.DiscountType;
+import com.ecommerce.enums.OrderPriority;
+import com.ecommerce.enums.ProductRating;
+import com.ecommerce.repository.CustomerRepository;
 import com.ecommerce.repository.ProductRepository;
+import com.ecommerce.service.CustomerService;
+import com.ecommerce.service.CustomerServiceImpl;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.service.ProductServiceImpl;
 
@@ -41,6 +47,11 @@ public class Main {
         ProductRepository productRepository = new ProductRepository();
         ProductService productService = new ProductServiceImpl(productRepository);
 
+//        customers
+        CustomerRepository customerRepository = new CustomerRepository();
+        CustomerService customerService = new CustomerServiceImpl(customerRepository);
+
+
         System.out.println(productService.getProductsByAvailability(true));
 
         System.out.println(productService.getProductsByCategory("Electronics"));
@@ -73,6 +84,14 @@ public class Main {
         System.out.println(productService.getAllAvailableProductsGreaterThan(100000));
         System.out.println("------------------------------");
         System.out.println(productService.getProductsCountByCategory());
+        System.out.println("*****************************************************");
+
+        System.out.println(customerService.getAllCustomers());
+
+        System.out.println(OrderPriority.HIGH.getDeliveryDays());
+
+        // customers
+
 
 
     }

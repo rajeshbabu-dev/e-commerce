@@ -1,5 +1,9 @@
 package com.ecommerce.util;
 
+import com.ecommerce.enums.*;
+import com.ecommerce.model.Address;
+import com.ecommerce.model.Customer;
+import com.ecommerce.model.Order;
 import com.ecommerce.model.Product;
 
 
@@ -42,6 +46,66 @@ public class CsvParser {
 
         }return products;
 
+    }
+
+    public List<Customer> getCustomersFromCsv() throws IOException {
+        List<Customer> customers = new ArrayList<>();
+        File file = new File("D:/Downloads/customers.csv");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        br.readLine();
+        String customerData = br.readLine();
+
+        while (customerData != null) {
+            String[] Split = customerData.split(",");
+            Address residential = parseAddress(Split[7]);
+            Address shipping = parseAddress((Split[8]));
+            Customer customer = new Customer();
+            customer.setId(Integer.parseInt(Split[0]))
+                    .setName(Split[1])
+                    .setEmail(Split[2])
+                    .setAge(Integer.parseInt(Split[3]))
+                    .setGender(Gender.valueOf(Split[4].trim().toUpperCase()))
+                    .setStatus(Status.valueOf(Split[5].trim().toUpperCase()))
+                    .setMembershipType(Membership.valueOf(Split[6].trim().toUpperCase()))
+                    .setResdentialAddress(residential)
+                    .setShippingAddress(shipping);
+            customers.add(customer);
+            customerData = br.readLine();
+
+        }
+        return customers;
+    }
+    public Address parseAddress(String address) {
+        String[] Split = address.split("\\|");
+        Address address1 = new Address();
+        address1.setHouseNo(Split[0].trim())
+                .setStreet(Split[1].trim())
+                .setArea(Split[2].trim())
+                .setCity(Split[3].trim())
+                .setPincode(Integer.parseInt(Split[4].trim()));
+        return address1;
+    }
+
+    public List<Order> getOrdersFromCsv() throws IOException {
+        List<Order> orders = new ArrayList<>();
+        File file = new File("/Users/VISHU/vishu/orders.csv");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            br.readLine();
+            String orderData = br.readLine();
+            while (orderData != null) {
+                String[] split = orderData.split(",");
+
+                Order order = new Order()
+                        .setId(Integer.parseInt(split[0].trim()))
+                        .setStatus(OrderStatus.valueOf(split[1].trim().toUpperCase()))
+                        .setPaymentMethod(PaymentMethod.valueOf(split[2].trim().toUpperCase()));
+
+                orders.add(order);
+                orderData = br.readLine();
+            }
+        }
+        return orders;
     }
 
 }
